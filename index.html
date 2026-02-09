@@ -1,103 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Prachi ♡ Forever</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta charset="UTF-8" />
+  <title>For Quana 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="lock">
-  <div class="lock-box">
-    <h2>For Prachi 💖</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="unlock()">Enter</button>
-    <p id="error"></p>
-  </div>
-</div>
-
-<!-- HEART INTRO -->
+<!-- HEARTS -->
 <div class="hearts-container"></div>
 
-<!-- MUSIC -->
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<!-- LANDING -->
+<section class="phase active" id="landing">
+  <div class="card">
+    <h1>Hey Quana Dream 💖</h1>
+    <p>
+      I’ve made something for you.  
+      Hope you’ll like it 😉
+    </p>
 
-<!-- CONTENT -->
-<div id="content">
-
-<section class="panel hero observe">
-  <div class="overlay center text-animate">
-    <h1>Hey Prachi 💖</h1>
-    <p>I made something for you.<br>Scroll slowly.</p>
+    <button id="beginBtn">Let’s begin</button>
   </div>
 </section>
 
-<section class="panel observe" data-style="fade">
-  <div class="image-stack morph">
-    <img src="images/convocation1.jpg">
-    <img src="images/convocation2.jpg">
-    <img src="images/convocation3.jpg">
-  </div>
-  <div class="overlay bottom text-animate">
-    <h2>The Day I Knew</h2>
-    <p>You travelled to another state just to be there for me.</p>
+<!-- PASSWORD -->
+<section class="phase" id="password">
+  <div class="card">
+    <h2>Uh-oh! 😌</h2>
+    <p>
+      Not that easy.  
+      I’ve put some effort, so you better do the same.
+    </p>
+
+    <p class="hint">
+      Hint: The day we first met at the airport ✈️
+    </p>
+
+    <input type="date" id="dateInput" />
+    <button id="unlockBtn">Unlock</button>
+
+    <p class="error" id="errorMsg"></p>
   </div>
 </section>
-
-<section class="panel observe" data-style="slide">
-  <div class="image-stack morph">
-    <img src="images/delhi1.jpg">
-    <img src="images/delhi2.jpg">
-    <img src="images/delhi3.jpg">
-  </div>
-  <div class="overlay bottom text-animate">
-    <h2>Delhi</h2>
-    <p>A full week together. Cafés. Silence. Loving you felt easy.</p>
-  </div>
-</section>
-
-<section class="panel observe" data-style="dissolve">
-  <div class="image-stack morph">
-    <img src="images/shillong1.jpg">
-    <img src="images/shillong2.jpg">
-    <img src="images/shillong3.jpg">
-    <img src="images/shillong4.jpg">
-  </div>
-  <div class="overlay bottom text-animate">
-    <h2>Shillong</h2>
-    <p>Short visits. No big plans. Just presence.</p>
-  </div>
-</section>
-
-<section class="panel observe" data-style="zoom">
-  <div class="image-stack morph">
-    <img src="images/manali1.jpg">
-    <img src="images/manali2.jpg">
-  </div>
-  <div class="overlay bottom text-animate">
-    <h2>Manali</h2>
-    <p>Arguments. Then mountains. I wished time would stop.</p>
-  </div>
-</section>
-
-<section class="panel observe final">
-  <div class="image-stack">
-    <img src="images/forever.jpg">
-  </div>
-  <div class="overlay center text-animate">
-    <h1><span class="strike">Will you be my Valentine?</span><br>Will you be my <b>Forever</b> ♾️</h1>
-    <button onclick="answer()">Yes, always 💖</button>
-    <div id="reply"></div>
-  </div>
-</section>
-
-</div>
 
 <script src="script.js"></script>
 </body>
