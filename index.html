@@ -2,48 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>For Quana 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>For You ❤️</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- HEARTS -->
-<div class="hearts-container"></div>
+<!-- Floating Hearts -->
+<div class="hearts"></div>
 
-<!-- LANDING -->
+<!-- ================= PHASE 1 ================= -->
+
 <section class="phase active" id="landing">
   <div class="card">
     <h1>Hey Quana Dream 💖</h1>
-    <p>
-      I’ve made something for you.  
-      Hope you’ll like it 😉
-    </p>
-
+    <p>I’ve made something for you.<br>Hope you’ll like it 😉</p>
     <button id="beginBtn">Let’s begin</button>
   </div>
 </section>
 
-<!-- PASSWORD -->
 <section class="phase" id="password">
   <div class="card">
-    <h2>Uh-oh! 😌</h2>
-    <p>
-      Not that easy.  
-      I’ve put some effort, so you better do the same.
-    </p>
-
-    <p class="hint">
-      Hint: The day we first met at the airport ✈️
-    </p>
+    <h2>Uh oh… not that easy 😌</h2>
+    <p>I’ve put some effort into this,<br>so you better do the same.</p>
+    <p class="hint">Hint: The day we first met at the airport ✈️</p>
 
     <input type="date" id="dateInput" />
     <button id="unlockBtn">Unlock</button>
-
-    <p class="error" id="errorMsg"></p>
+    <p id="error">That’s not it… try again 💭</p>
   </div>
+</section>
+
+<!-- ================= PHASE 2 ================= -->
+
+<section class="phase" id="story">
+
+  <!-- INTRO NOTE -->
+  <div class="chapter active">
+    <div class="content">
+      <h1>Before we begin…</h1>
+      <p>
+        Thank you for being there for me.<br>
+        For supporting me, choosing me,<br>
+        and standing by my side.
+      </p>
+      <p>
+        Life feels stronger and lighter<br>
+        because I get to share it with you.
+      </p>
+      <button class="next">Let’s begin our story 💖</button>
+    </div>
+  </div>
+
+  <!-- CONVOCATION -->
+  <div class="chapter">
+    <div class="image-stack">
+      <img src="images/convocation1.jpg" class="active">
+      <img src="images/convocation2.jpg">
+      <img src="images/convocation3.jpg">
+    </div>
+    <div class="content">
+      <h2>The Day You Showed Up</h2>
+      <p>
+        You travelled to another state,<br>
+        quietly, just to be there for me.
+      </p>
+      <p>
+        That day wasn’t about a degree.<br>
+        It was about knowing I wasn’t alone.
+      </p>
+      <button class="next">Next journey →</button>
+    </div>
+  </div>
+
+  <!-- DELHI -->
+  <div class="chapter">
+    <div class="image-stack">
+      <img src="images/delhi1.jpg" class="active">
+      <img src="images/delhi2.jpg">
+      <img src="images/delhi3.jpg">
+    </div>
+    <div class="content">
+      <h2>Delhi</h2>
+      <p>
+        A whole week together.<br>
+        Cafés, routines, quiet moments.
+      </p>
+      <p>
+        Loving you felt easy.<br>
+        Living with you felt right.
+      </p>
+      <button class="next">Next journey →</button>
+    </div>
+  </div>
+
+  <!-- SHILLONG -->
+  <div class="chapter">
+    <div class="image-stack">
+      <img src="images/shillong1.jpg" class="active">
+      <img src="images/shillong2.jpg">
+      <img src="images/shillong3.jpg">
+      <img src="images/shillong4.jpg">
+    </div>
+    <div class="content">
+      <h2>Shillong</h2>
+      <p>
+        Short visits. No big plans.<br>
+        Just presence.
+      </p>
+      <p>
+        Watching you grow on your own<br>
+        made me admire you even more.
+      </p>
+      <button class="next">Next journey →</button>
+    </div>
+  </div>
+
+  <!-- MANALI -->
+  <div class="chapter">
+    <div class="image-stack">
+      <img src="images/manali1.jpg" class="active">
+      <img src="images/manali2.jpg">
+    </div>
+    <div class="content">
+      <h2>Manali</h2>
+      <p>
+        Arguments, chaos…<br>
+        and then mountains.
+      </p>
+      <p>
+        Riding with you behind me,<br>
+        I wished time would slow down.
+      </p>
+      <button class="next">Next journey →</button>
+    </div>
+  </div>
+
+  <!-- DHARAMSHALA -->
+  <div class="chapter">
+    <div class="image-stack">
+      <img src="images/dharamshala1.jpg" class="active">
+      <img src="images/dharamshala2.jpg">
+      <img src="images/dharamshala3.jpg">
+    </div>
+    <div class="content">
+      <h2>Your Birthday</h2>
+      <p>
+        Scooter rides, cafés,<br>
+        small fights, big love.
+      </p>
+      <p>
+        This is how I want to live<br>
+        my life — with you.
+      </p>
+    </div>
+  </div>
+
 </section>
 
 <script src="script.js"></script>
