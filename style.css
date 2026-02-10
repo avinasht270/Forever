@@ -1,139 +1,108 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
-  margin: 0;
-  padding: 0;
   height: 100%;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #000;
+  background: radial-gradient(circle at top, #2a001e, #0b0014);
   color: #fff;
   overflow: hidden;
 }
 
-.phase { display: none; height: 100vh; width: 100vw; }
-.phase.active { display: block; }
-
-.center {
+.container {
   height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 24px;
+  justify-content: center;
+  padding: 20px;
 }
 
-h1 { font-size: 2.6rem; margin-bottom: 16px; }
-h2 { font-size: 2.4rem; margin-bottom: 18px; }
+.card {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  padding: 40px 30px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: fadeIn 1.2s ease;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
 
 p {
-  font-size: 1.5rem;
-  line-height: 1.9;
-  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
-/* BACKGROUND IMAGE */
-.bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 1.2s ease;
+.footer {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
 
-.bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,0.35) 0%,
-    rgba(0,0,0,0.55) 60%,
-    rgba(0,0,0,0.75) 100%
-  );
-}
-
-.bg.hidden { opacity: 0; }
-
-/* STORY TEXT OVER IMAGE */
-.story-overlay {
-  position: absolute;
-  inset: 0;
+/* LOADER DOTS */
+.loader {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 10% 8%;
-  text-align: left;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px 0;
 }
 
-#typed-line {
-  font-size: 1.7rem;
-  line-height: 1.9;
-  max-width: 800px;
-  text-shadow: 0 2px 18px rgba(0,0,0,0.8);
+.loader span {
+  width: 10px;
+  height: 10px;
+  background: #ff7aa2;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
 }
 
-/* CHAPTER REVEAL */
-.chapter-reveal {
-  animation: chapterReveal 1.4s ease forwards;
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
-@keyframes chapterReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(24px) scale(0.95);
-    text-shadow: none;
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    text-shadow: 0 0 22px rgba(255,150,180,0.7);
+  40% {
+    transform: scale(1);
   }
 }
 
-button {
-  background: linear-gradient(135deg, #ff4d6d, #ff8fab);
-  border: none;
-  color: white;
-  padding: 14px 28px;
-  font-size: 1rem;
-  border-radius: 30px;
-}
-
-input {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-}
-
-#error { display: none; color: #ff9aa2; }
-
-.unlock-anim { animation: pop 1.2s ease forwards; }
-@keyframes pop {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.choices { display: flex; gap: 24px; }
-.forever { color: #ffb3c6; font-size: 2.7rem; }
-
-.celebrate h1 {
-  animation: glow 1.5s ease infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px #ff7aa2; }
-  to { text-shadow: 0 0 30px #ffb3c6; }
-}
-
+/* HEARTS */
 .hearts span {
   position: fixed;
   bottom: -20px;
-  animation: float 14s linear infinite;
+  animation: float 12s linear infinite;
 }
 
 @keyframes float {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

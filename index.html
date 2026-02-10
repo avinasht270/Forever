@@ -2,69 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Forever</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something Special</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <div class="hearts"></div>
 
-<section id="landing" class="phase active">
-  <div class="center">
-    <h1>Hey Quana Dream 💖</h1>
-    <p>I’ve made something for you.<br>Hope you’ll like it 😉</p>
-    <button id="beginBtn">Let’s Begin</button>
-  </div>
-</section>
+<div class="container">
+  <div class="card">
+    <h1>👨‍🍳 Chef is cooking…</h1>
+    <p>
+      Something special is being prepared just for you 💖<br><br>
+      Please stay tuned.<br>
+      Good things take time 😉
+    </p>
 
-<section id="password" class="phase">
-  <div class="center">
-    <h2>Uh oh… not that easy 😌</h2>
-    <p>Put in some effort for us.</p>
-    <p class="hint">Hint: The day we first met at the airport ✈️</p>
-    <input type="date" id="dateInput" />
-    <button id="unlockBtn">Unlock</button>
-    <p id="error">That’s not it. Try again 💭</p>
-  </div>
-</section>
-
-<section id="unlock" class="phase">
-  <div class="center unlock-anim">
-    <h1>Yay! 💖</h1>
-    <p>You’ve unlocked my heart</p>
-  </div>
-</section>
-
-<section id="story" class="phase">
-  <div class="bg" id="bgA"></div>
-  <div class="bg hidden" id="bgB"></div>
-
-  <div class="story-overlay">
-    <h2 id="chapter"></h2>
-    <p id="typed-line"></p>
-  </div>
-</section>
-
-<section id="final" class="phase">
-  <div class="center">
-    <h1>
-      Will you be my <s>Valentine</s><br>
-      <span class="forever">Forever ♾️</span>
-    </h1>
-    <div class="choices">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No 🙃</button>
+    <div class="loader">
+      <span></span><span></span><span></span>
     </div>
-  </div>
-</section>
 
-<section id="celebrate" class="phase">
-  <div class="center celebrate">
-    <h1>Happy Valentine’s Day 💖</h1>
-    <p>My Forever.</p>
+    <p class="footer">
+      Updates coming soon ✨
+    </p>
   </div>
-</section>
+</div>
 
 <script src="script.js"></script>
 </body>
