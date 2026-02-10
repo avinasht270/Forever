@@ -2,45 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>For You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Forever</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- Floating Hearts -->
 <div class="hearts"></div>
 
-<!-- ========== PHASE 1 ========== -->
-
-<section class="phase active" id="landing">
-  <div class="card">
+<!-- PHASE 1 : LANDING -->
+<section id="landing" class="phase active">
+  <div class="center">
     <h1>Hey Quana Dream 💖</h1>
     <p>I’ve made something for you.<br>Hope you’ll like it 😉</p>
-    <button id="beginBtn">Let’s begin</button>
+    <button id="beginBtn">Let’s Begin</button>
   </div>
 </section>
 
-<section class="phase" id="password">
-  <div class="card">
+<!-- PASSWORD -->
+<section id="password" class="phase">
+  <div class="center">
     <h2>Uh oh… not that easy 😌</h2>
-    <p>I’ve put some effort into this,<br>so you better do the same.</p>
+    <p>Put in some effort for us.</p>
     <p class="hint">Hint: The day we first met at the airport ✈️</p>
-
     <input type="date" id="dateInput" />
     <button id="unlockBtn">Unlock</button>
-    <p id="error">That’s not it… try again 💭</p>
+    <p id="error">That’s not it. Try again 💭</p>
   </div>
 </section>
 
-<!-- ========== PHASE 2 ========== -->
+<!-- UNLOCK -->
+<section id="unlock" class="phase">
+  <div class="center unlock-anim">
+    <h1>Yay! 💖</h1>
+    <p>You’ve unlocked my heart</p>
+  </div>
+</section>
 
-<section class="phase" id="story">
-  <div id="story-bg"></div>
+<!-- STORY -->
+<section id="story" class="phase">
+  <div class="bg" id="bgA"></div>
+  <div class="bg hidden" id="bgB"></div>
 
-  <div id="story-text">
+  <div class="story-text">
+    <h2 id="chapter"></h2>
     <p id="typed-line"></p>
-    <span class="tap-hint">tap to continue</span>
+    <span class="tap">Tap anywhere</span>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section id="final" class="phase">
+  <div class="center">
+    <h1>
+      Will you be my <s>Valentine</s><br>
+      <span class="forever">Forever ♾️</span>
+    </h1>
+
+    <div class="choices">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙃</button>
+    </div>
   </div>
 </section>
 

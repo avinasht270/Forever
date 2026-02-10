@@ -1,141 +1,180 @@
-/* ---------- FLOATING HEARTS ---------- */
+/* HEARTS */
 const hearts = document.querySelector(".hearts");
 setInterval(() => {
   const h = document.createElement("span");
   h.innerText = Math.random() > 0.5 ? "💖" : "💗";
   h.style.left = Math.random() * 100 + "vw";
-  h.style.fontSize = 14 + Math.random() * 20 + "px";
-  h.style.animationDuration = 6 + Math.random() * 6 + "s";
+  h.style.fontSize = 12 + Math.random() * 18 + "px";
   hearts.appendChild(h);
-  setTimeout(() => h.remove(), 12000);
-}, 450);
+  setTimeout(() => h.remove(), 15000);
+}, 1000);
 
-/* ---------- PHASE SWITCH ---------- */
-function showPhase(id) {
+/* PHASE CONTROL */
+function show(id) {
   document.querySelectorAll(".phase").forEach(p => p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* ---------- PHASE 1 ---------- */
-document.getElementById("beginBtn").onclick = () => {
-  navigator.vibrate?.(100);
-  showPhase("password");
+/* LANDING */
+beginBtn.onclick = () => {
+  navigator.vibrate?.(80);
+  show("password");
 };
 
-document.getElementById("unlockBtn").onclick = () => {
-  const input = document.getElementById("dateInput").value;
-  const error = document.getElementById("error");
-
-  if (input === "2022-12-24") {
-    navigator.vibrate?.([80, 40, 80]);
-    startPhase2();
+unlockBtn.onclick = () => {
+  if (dateInput.value === "2022-12-24") {
+    navigator.vibrate?.([60,30,60]);
+    show("unlock");
+    setTimeout(() => startGratitude(), 2200);
   } else {
     error.style.display = "block";
-    navigator.vibrate?.(60);
   }
 };
 
-/* ---------- PHASE 2 DATA ---------- */
-const stories = [
+/* BACKGROUNDS */
+const bgA = document.getElementById("bgA");
+const bgB = document.getElementById("bgB");
+let activeBg = bgA, nextBg = bgB;
+
+function setBg(src) {
+  if (!src) return;
+  nextBg.style.backgroundImage = `url(${src})`;
+  nextBg.classList.remove("hidden");
+  activeBg.classList.add("hidden");
+  [activeBg, nextBg] = [nextBg, activeBg];
+}
+
+/* TYPEWRITER */
+let typing = false;
+function typeLine(line, i = 0) {
+  typing = true;
+  text.innerText = line.slice(0, i);
+  if (i < line.length) {
+    setTimeout(() => typeLine(line, i + 1), 36);
+  } else {
+    typing = false;
+  }
+}
+
+/* GRATITUDE */
+const gratitude = [
+  "Before we go anywhere…",
+  "I just want to say thank you.",
+  "Thank you for choosing me.",
+  "For showing up when it mattered.",
+  "This… is our story."
+];
+
+let g = 0;
+let mode = "gratitude";
+
+function startGratitude() {
+  show("story");
+  chapter.innerText = "";
+  typeLine(gratitude[g]);
+}
+
+/* STORY DATA */
+const story = [
   {
+    title: "The Beginning",
     images: ["images/convocation1.jpg","images/convocation2.jpg","images/convocation3.jpg"],
     lines: [
-      ["You travelled to another state just to be there for me.","Quietly. Without expectations."],
-      ["We laughed, clicked pictures,","and celebrated one of the biggest days of my life."],
-      ["That day wasn’t just about a degree.","It was about knowing I wasn’t alone anymore."]
+      "You were still in college.",
+      "You crossed states just to be there for me.",
+      "Standing beside me on the most important day of my life.",
+      "That’s when I knew… this was real."
     ]
   },
   {
+    title: "Delhi",
     images: ["images/delhi1.jpg","images/delhi2.jpg","images/delhi3.jpg"],
     lines: [
-      ["Delhi gave us time.","Time to live together."],
-      ["Cafés. Silence. Small routines.","Everything felt natural with you."],
-      ["Loving you wasn’t hard.","Living with you felt right."]
+      "A full week together.",
+      "Your English accent with waiters.",
+      "Delhi never felt this warm before."
     ]
   },
   {
-    images: ["images/shillong1.jpg","images/shillong2.jpg","images/shillong3.jpg","images/shillong4.jpg"],
+    title: "Shillong",
+    images: ["images/shillong1.jpg","images/shillong2.jpg","images/shillong3.jpg"],
     lines: [
-      ["Short visits.","No big plans."],
-      ["Just presence.","Just us."],
-      ["Watching you manage life on your own","made me admire you even more."],
-      ["Those moments mattered more","than you’ll ever know."]
+      "Short visits.",
+      "No big plans.",
+      "Just watching you grow stronger."
     ]
   },
   {
+    title: "Manali",
     images: ["images/manali1.jpg","images/manali2.jpg"],
     lines: [
-      ["Arguments.","Chaos."],
-      ["And then… mountains.","Riding with you behind me."],
-      ["I wished time would slow down.","Just a little."]
+      "Arguments turned into laughter.",
+      "Scooter rides through mountains.",
+      "I wished time would stop."
     ]
   },
   {
-    images: ["images/dharamshala1.jpg","images/dharamshala2.jpg","images/dharamshala3.jpg"],
+    title: "Dharamshala",
+    images: ["images/dharamshala1.jpg","images/dharamshala2.jpg"],
     lines: [
-      ["Your birthday.","Our time."],
-      ["Scooter rides. Cafés.","Small fights. Big love."],
-      ["This is how I want to live.","My life — with you."]
+      "Your birthday week.",
+      "Small fights. Big love.",
+      "Every mile was worth it."
     ]
   }
 ];
 
-/* ---------- STORY ENGINE ---------- */
-let s = 0, i = 0, l = 0, c = 0, typing = false;
-const bg = document.getElementById("story-bg");
-const text = document.getElementById("typed-line");
+let s = 0, i = 0, l = 0;
 
-function startPhase2() {
-  showPhase("story");
-  loadImage();
-  typeLine();
-}
-
-function loadImage() {
-  bg.style.opacity = 0;
-  setTimeout(() => {
-    bg.style.backgroundImage = `url('${stories[s].images[i]}')`;
-    bg.style.opacity = 1;
-  }, 400);
-}
-
-function typeLine() {
-  typing = true;
-  text.innerText = "";
-  const line = stories[s].lines[i][l];
-  c = 0;
-
-  const interval = setInterval(() => {
-    text.innerText += line.charAt(c++);
-    if (c >= line.length) {
-      clearInterval(interval);
-      typing = false;
-    }
-  }, 35);
-}
-
-document.getElementById("story").addEventListener("click", () => {
+/* STORY FLOW */
+document.getElementById("story").onclick = () => {
   if (typing) return;
 
+  if (mode === "gratitude") {
+    g++;
+    if (g < gratitude.length) {
+      typeLine(gratitude[g]);
+    } else {
+      mode = "story";
+      chapter.innerText = story[s].title;
+      setBg(story[s].images[i]);
+      typeLine(story[s].lines[l]);
+    }
+    return;
+  }
+
   l++;
-  if (l < stories[s].lines[i].length) {
-    typeLine();
+  if (l < story[s].lines.length) {
+    typeLine(story[s].lines[l]);
     return;
   }
 
   l = 0;
   i++;
-  if (i < stories[s].images.length) {
-    loadImage();
-    typeLine();
+  if (i < story[s].images.length) {
+    setBg(story[s].images[i]);
+    typeLine(story[s].lines[l]);
     return;
   }
 
-  s++; i = 0;
-  if (s < stories.length) {
-    loadImage();
-    typeLine();
+  s++;
+  i = 0;
+  if (s < story.length) {
+    chapter.innerText = story[s].title;
+    setBg(story[s].images[i]);
+    typeLine(story[s].lines[l]);
   } else {
-    text.innerText = "And that’s how our story keeps growing… 💖";
+    show("final");
   }
-});
+};
+
+/* FINAL */
+noBtn.onclick = () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * 70 + "%";
+  noBtn.style.top = Math.random() * 70 + "%";
+};
+
+yesBtn.onclick = () => {
+  alert("I knew it 💖");
+};
