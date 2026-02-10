@@ -1,13 +1,14 @@
 /* HEARTS */
 const hearts = document.querySelector(".hearts");
-setInterval(() => {
+let heartInterval = setInterval(spawnHeart, 1200);
+function spawnHeart() {
   const h = document.createElement("span");
   h.innerText = Math.random() > 0.5 ? "💖" : "💗";
   h.style.left = Math.random() * 100 + "vw";
   h.style.fontSize = 12 + Math.random() * 18 + "px";
   hearts.appendChild(h);
   setTimeout(() => h.remove(), 15000);
-}, 1200);
+}
 
 /* PHASE CONTROL */
 function show(id) {
@@ -16,15 +17,11 @@ function show(id) {
 }
 
 /* LANDING */
-beginBtn.onclick = () => {
-  navigator.vibrate?.(80);
-  show("password");
-};
+beginBtn.onclick = () => show("password");
 
 /* PASSWORD */
 unlockBtn.onclick = () => {
   if (dateInput.value === "2022-12-24") {
-    navigator.vibrate?.([60,30,60]);
     show("unlock");
     setTimeout(startGratitude, 2200);
   } else {
@@ -32,11 +29,10 @@ unlockBtn.onclick = () => {
   }
 };
 
-/* BACKGROUND SWAP */
+/* BACKGROUND */
 const bgA = document.getElementById("bgA");
 const bgB = document.getElementById("bgB");
 let activeBg = bgA, nextBg = bgB;
-
 function setBg(src) {
   nextBg.style.backgroundImage = `url(${src})`;
   nextBg.classList.remove("hidden");
@@ -51,7 +47,7 @@ function typeLine(line, i = 0) {
   const el = document.getElementById("typed-line");
   el.innerText = line.slice(0, i);
   if (i < line.length) {
-    setTimeout(() => typeLine(line, i + 1), 36);
+    setTimeout(() => typeLine(line, i + 1), 34);
   } else {
     typing = false;
   }
@@ -62,111 +58,164 @@ const gratitude = [
   "Before we go anywhere…",
   "I just want to say thank you.",
   "Thank you for choosing me.",
-  "For standing by my side.",
   "This… is our story."
 ];
-
 let g = 0;
 let mode = "gratitude";
-
-function startGratitude() {
-  show("story");
-  chapter.innerText = "";
-  typeLine(gratitude[g]);
-}
 
 /* STORY DATA */
 const story = [
   {
     title: "The Beginning",
-    images: ["images/convocation1.jpg","images/convocation2.jpg","images/convocation3.jpg"],
-    lines: [
-      "You crossed states just to be there for me.",
-      "Standing beside me on the most important day of my life.",
-      "That’s when I knew… this was real."
+    scenes: [
+      { img: "images/convocation1.jpg", lines: [
+        "You were still in college.",
+        "And yet, you crossed states just to be there for me."
+      ]},
+      { img: "images/convocation2.jpg", lines: [
+        "Hiding it from home.",
+        "Standing beside me among my friends."
+      ]},
+      { img: "images/convocation3.jpg", lines: [
+        "That’s when I knew…",
+        "This was real."
+      ]}
     ]
   },
   {
     title: "Delhi",
-    images: ["images/delhi1.jpg","images/delhi2.jpg","images/delhi3.jpg"],
-    lines: [
-      "A full week together.",
-      "Your accent with waiters.",
-      "Delhi never felt this warm."
+    scenes: [
+      { img: "images/delhi1.jpg", lines: [
+        "A full week together.",
+        "No filters. No distance."
+      ]},
+      { img: "images/delhi2.jpg", lines: [
+        "Fancy dinners.",
+        "Your English accent with waiters."
+      ]},
+      { img: "images/delhi3.jpg", lines: [
+        "Delhi never felt this warm."
+      ]}
     ]
   },
   {
     title: "Shillong",
-    images: ["images/shillong1.jpg","images/shillong2.jpg","images/shillong3.jpg"],
-    lines: [
-      "Short visits.",
-      "No big plans.",
-      "Just presence."
+    scenes: [
+      { img: "images/shillong1.jpg", lines: [
+        "Short visits between life and work.",
+        "You managing everything on your own."
+      ]},
+      { img: "images/shillong2.jpg", lines: [
+        "You didn’t love Shillong.",
+        "But I loved watching you there."
+      ]},
+      { img: "images/shillong3.jpg", lines: [
+        "Strong.",
+        "Brave.",
+        "Home."
+      ]}
     ]
   },
   {
     title: "Manali",
-    images: ["images/manali1.jpg","images/manali2.jpg"],
-    lines: [
-      "Arguments turned into laughter.",
-      "Scooter rides through mountains.",
-      "I wished time would stop."
+    scenes: [
+      { img: "images/manali1.jpg", lines: [
+        "Yes. No. Not possible.",
+        "Arguments before agreement."
+      ]},
+      { img: "images/manali2.jpg", lines: [
+        "Scooter rides through mountains.",
+        "Time felt too short."
+      ]}
     ]
   },
   {
     title: "Dharamshala",
-    images: ["images/dharamshala1.jpg","images/dharamshala2.jpg"],
-    lines: [
-      "Your birthday week.",
-      "Small fights. Big love.",
-      "Every mile was worth it."
+    scenes: [
+      { img: "images/dharamshala1.jpg", lines: [
+        "Your birthday week.",
+        "Us. Again."
+      ]},
+      { img: "images/dharamshala2.jpg", lines: [
+        "Small fights.",
+        "Big love."
+      ]},
+      { img: "images/dharamshala3.jpg", lines: [
+        "A 16km ride I still hear about.",
+        "And I’d do it again."
+      ]}
     ]
   }
 ];
 
-let s = 0, i = 0, l = 0;
+let chapterIndex = 0, sceneIndex = 0, lineIndex = 0;
+let chapterIntro = true;
+let finished = false;
 
-/* TAP TO PROGRESS */
+/* START */
+function startGratitude() {
+  show("story");
+  typeLine(gratitude[g]);
+}
+
+/* TAP */
 document.getElementById("story").onclick = () => {
-  if (typing) return;
+  if (typing || finished) return;
 
   if (mode === "gratitude") {
     g++;
     if (g < gratitude.length) {
       typeLine(gratitude[g]);
     } else {
-      mode = "story";
-      chapter.innerText = story[s].title;
-      setBg(story[s].images[i]);
-      typeLine(story[s].lines[l]);
+      mode = "chapter";
+      chapterIntro = true;
+      showChapter();
     }
     return;
   }
 
-  l++;
-  if (l < story[s].lines.length) {
-    typeLine(story[s].lines[l]);
+  if (chapterIntro) {
+    chapterIntro = false;
+    sceneIndex = 0;
+    lineIndex = 0;
+    setBg(story[chapterIndex].scenes[sceneIndex].img);
+    typeLine(story[chapterIndex].scenes[sceneIndex].lines[lineIndex]);
     return;
   }
 
-  l = 0;
-  i++;
-  if (i < story[s].images.length) {
-    setBg(story[s].images[i]);
-    typeLine(story[s].lines[l]);
+  lineIndex++;
+  if (lineIndex < story[chapterIndex].scenes[sceneIndex].lines.length) {
+    typeLine(story[chapterIndex].scenes[sceneIndex].lines[lineIndex]);
     return;
   }
 
-  s++;
-  i = 0;
-  if (s < story.length) {
-    chapter.innerText = story[s].title;
-    setBg(story[s].images[i]);
-    typeLine(story[s].lines[l]);
+  lineIndex = 0;
+  sceneIndex++;
+  if (sceneIndex < story[chapterIndex].scenes.length) {
+    setBg(story[chapterIndex].scenes[sceneIndex].img);
+    typeLine(story[chapterIndex].scenes[sceneIndex].lines[lineIndex]);
+    return;
+  }
+
+  chapterIndex++;
+  chapterIntro = true;
+  if (chapterIndex < story.length) {
+    showChapter();
   } else {
+    finished = true;
     show("final");
   }
 };
+
+function showChapter() {
+  const ch = document.getElementById("chapter");
+  ch.innerText = "";
+  ch.classList.remove("chapter-reveal");
+  void ch.offsetWidth; // force reflow
+  ch.innerText = story[chapterIndex].title;
+  ch.classList.add("chapter-reveal");
+  document.getElementById("typed-line").innerText = "";
+}
 
 /* FINAL */
 noBtn.onclick = () => {
@@ -176,5 +225,7 @@ noBtn.onclick = () => {
 };
 
 yesBtn.onclick = () => {
-  alert("I knew it 💖");
+  clearInterval(heartInterval);
+  heartInterval = setInterval(spawnHeart, 250);
+  show("celebrate");
 };
