@@ -7,7 +7,7 @@ setInterval(() => {
   h.style.fontSize = 12 + Math.random() * 18 + "px";
   hearts.appendChild(h);
   setTimeout(() => h.remove(), 15000);
-}, 1000);
+}, 1200);
 
 /* PHASE CONTROL */
 function show(id) {
@@ -21,23 +21,23 @@ beginBtn.onclick = () => {
   show("password");
 };
 
+/* PASSWORD */
 unlockBtn.onclick = () => {
   if (dateInput.value === "2022-12-24") {
     navigator.vibrate?.([60,30,60]);
     show("unlock");
-    setTimeout(() => startGratitude(), 2200);
+    setTimeout(startGratitude, 2200);
   } else {
     error.style.display = "block";
   }
 };
 
-/* BACKGROUNDS */
+/* BACKGROUND SWAP */
 const bgA = document.getElementById("bgA");
 const bgB = document.getElementById("bgB");
 let activeBg = bgA, nextBg = bgB;
 
 function setBg(src) {
-  if (!src) return;
   nextBg.style.backgroundImage = `url(${src})`;
   nextBg.classList.remove("hidden");
   activeBg.classList.add("hidden");
@@ -48,7 +48,8 @@ function setBg(src) {
 let typing = false;
 function typeLine(line, i = 0) {
   typing = true;
-  text.innerText = line.slice(0, i);
+  const el = document.getElementById("typed-line");
+  el.innerText = line.slice(0, i);
   if (i < line.length) {
     setTimeout(() => typeLine(line, i + 1), 36);
   } else {
@@ -61,7 +62,7 @@ const gratitude = [
   "Before we go anywhere…",
   "I just want to say thank you.",
   "Thank you for choosing me.",
-  "For showing up when it mattered.",
+  "For standing by my side.",
   "This… is our story."
 ];
 
@@ -80,7 +81,6 @@ const story = [
     title: "The Beginning",
     images: ["images/convocation1.jpg","images/convocation2.jpg","images/convocation3.jpg"],
     lines: [
-      "You were still in college.",
       "You crossed states just to be there for me.",
       "Standing beside me on the most important day of my life.",
       "That’s when I knew… this was real."
@@ -91,8 +91,8 @@ const story = [
     images: ["images/delhi1.jpg","images/delhi2.jpg","images/delhi3.jpg"],
     lines: [
       "A full week together.",
-      "Your English accent with waiters.",
-      "Delhi never felt this warm before."
+      "Your accent with waiters.",
+      "Delhi never felt this warm."
     ]
   },
   {
@@ -101,7 +101,7 @@ const story = [
     lines: [
       "Short visits.",
       "No big plans.",
-      "Just watching you grow stronger."
+      "Just presence."
     ]
   },
   {
@@ -126,7 +126,7 @@ const story = [
 
 let s = 0, i = 0, l = 0;
 
-/* STORY FLOW */
+/* TAP TO PROGRESS */
 document.getElementById("story").onclick = () => {
   if (typing) return;
 
