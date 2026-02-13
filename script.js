@@ -4,15 +4,15 @@ const bgLayer = document.getElementById("globalBackground");
 /* STORY DATA */
 const story = [
     {
-        title: "Convocation",
+        title: "The Beginning",
         scenes: [
-            { img: "images/convocation1.jpg", text: "You took a leap of faith, flying across the states while still in college..." },
-            { img: "images/convocation2.jpg", text: "...hiding it from home just to stand by my side, on one of my most important day of life" },
+            { img: "images/convocation1.jpg", text: "You took a leap of faith, flying across the country while still in college..." },
+            { img: "images/convocation2.jpg", text: "...hiding it from everyone just to stand by my side." },
             { img: "images/convocation3.jpg", text: "In that crowded hall, I knew right then: You are my forever." }
         ]
     },
     {
-        title: "Delhi",
+        title: "Delhi Days",
         scenes: [
             { img: "images/delhi1.jpg", text: "They say living together reveals who a person truly is." },
             { img: "images/delhi2.jpg", text: "For us? It revealed magic. Just you, me, and the city lights." },
@@ -20,26 +20,26 @@ const story = [
         ]
     },
     {
-        title: "Shillong",
+        title: "Brave Shillong",
         scenes: [
-            { img: "images/shillong1.jpg", text: "You never really liked Shillong much. But I loved seeing you there" },
-            { img: "images/shillong2.jpg", text: "Managing everything on your own. Away from home, but never weak" },
-            { img: "images/shillong3.jpg", text: "Strong. Mature. And still the same clumsy girl I tease." }
+            { img: "images/shillong1.jpg", text: "Shillong wasn't easy for you, I know." },
+            { img: "images/shillong2.jpg", text: "But watching you manage everything alone left me in awe." },
+            { img: "images/shillong3.jpg", text: "You showed me exactly how brave and resilient you are." }
         ]
     },
     {
         title: "Manali Chaos",
         scenes: [
-            { img: "images/manali1.jpg", text: "Yes. No. Not possible. Arguments. And then finally… we’re going." },
-            { img: "images/manali2.jpg", text: "Mountains. Scooter rides. You behind me. For two days, the world felt paused. I wished it lasted longer." }
+            { img: "images/manali1.jpg", text: "The arguments, the 'No', the 'Not Possible'..." },
+            { img: "images/manali2.jpg", text: "But seeing you on the back of that scooter made every struggle worth it." }
         ]
     },
     {
         title: "Dharamshala",
         scenes: [
-            { img: "images/dharamshala1.jpg", text: "Your birthday week. Scooters and café hopping. Small fights. Big love." },
-            { img: "images/dharamshala2.jpg", text: "And that 16km Himachali Dham ride? Maybe unnecessary. Still worth it." },
-            { img: "images/dharamshala3.jpg", text: "We never let arguments win. Our fights don't break us; they build us." }
+            { img: "images/dharamshala1.jpg", text: "Birthday week madness and cafe hopping!" },
+            { img: "images/dharamshala2.jpg", text: "I'd ride 16km for the 'wrong' food any day just to see you laugh." },
+            { img: "images/dharamshala3.jpg", text: "Our fights don't break us; they build us." }
         ]
     }
 ];
@@ -56,7 +56,7 @@ function goTo(id) {
     const target = document.getElementById(id);
     target.classList.add("active");
 
-    // Clear manual Backgrounds first
+    // Reset BG
     bgLayer.style.backgroundImage = "none";
 
     if (id === "chapterStory") {
@@ -69,8 +69,7 @@ function goTo(id) {
         fadeOutMusic();
     }
     else if (id === "final") {
-        bgLayer.className = "background-layer"; // Clean class
-        // FORCE FOREVER.JPG BACKGROUND
+        bgLayer.className = "background-layer"; 
         bgLayer.style.backgroundImage = "url('images/forever.jpg')";
         stopHearts();
     }
@@ -86,7 +85,7 @@ function unlock() {
         goTo("gratitude");
         fadeInMusic();
     } else {
-        document.getElementById("errorMsg").innerText = "Oops! Not correct. Think about the Airport 😉";
+        document.getElementById("errorMsg").innerText = "Think about the Airport 😉";
     }
 }
 
@@ -108,19 +107,20 @@ function playChapter(index) {
     document.getElementById("tapPrompt").style.display = "none"; 
     document.getElementById("storyText").innerText = "";
     
-    // Hide titles initially so they don't ghost
+    // Hide static title immediately to prevent overlap
     staticTitle.classList.add("hidden-fade"); 
     bigTitle.style.opacity = 0; 
 
-    // 2. Fade Overlay to Black
+    // 2. FADE SCREEN TO BLACK
     overlay.style.opacity = 1;
     
-    // 3. WAIT for black screen, THEN swap text
+    // 3. WAIT 1.5s (Matches CSS transition) BEFORE CHANGING TEXT
     setTimeout(() => {
+        // Safe to update text now (screen is black)
         bigTitle.innerText = story[index].title;
         staticTitle.innerText = story[index].title;
         
-        // Fade in Big Title now that it's updated
+        // Show Big Title
         bigTitle.style.opacity = 1; 
         
         const imgUrl = story[index].scenes[0].img;
@@ -130,18 +130,18 @@ function playChapter(index) {
         img.onload = () => {
             bg.style.backgroundImage = `url('${imgUrl}')`;
             
-            // 4. Reveal Scene
+            // 4. Reveal Scene (Wait 2s for title reading)
             setTimeout(() => {
-                bigTitle.style.opacity = 0; // Fade out big title first
+                bigTitle.style.opacity = 0; 
                 setTimeout(() => {
-                    overlay.style.opacity = 0; // Then fade overlay
+                    overlay.style.opacity = 0; 
                     bg.classList.add("loaded"); 
-                    staticTitle.classList.remove("hidden-fade"); // Show static title
+                    staticTitle.classList.remove("hidden-fade"); 
                     setTimeout(() => showScene(), 500);
                 }, 800);
             }, 2000);
         };
-    }, 1000);
+    }, 1500); // 1.5s delay is CRITICAL for sync
 }
 
 function showScene() {
@@ -188,7 +188,7 @@ document.getElementById("chapterStory").onclick = (e) => {
 document.getElementById("nextChapterBtn").onclick = (e) => {
     e.stopPropagation();
     
-    // TRANSITION START: Fade to Black
+    // TRANSITION: Fade to Black
     const overlay = document.getElementById("cinematicOverlay");
     document.getElementById("staticChapterTitle").classList.add("hidden-fade");
     overlay.style.opacity = 1;
@@ -203,7 +203,7 @@ document.getElementById("nextChapterBtn").onclick = (e) => {
         } else {
             showTogetherPage();
         }
-    }, 1200);
+    }, 1500);
 };
 
 // --- ENDING ---
@@ -235,7 +235,7 @@ function sayYes() {
     
     goTo("celebrate");
     document.getElementById("celebrateTitle").innerText = "I Knew It! ❤️";
-    document.getElementById("celebrateBody").innerText = "You couldn't break my heart 😉.\nHappy Valentine's Day, my baby, my Forever.";
+    document.getElementById("celebrateBody").innerText = "You couldn't break my heart 😉.\nHappy Valentine's Day, my Forever.";
     
     startConfetti();
     fadeInMusic();
@@ -259,28 +259,49 @@ function typeWriter(id, text, cb) {
     type();
 }
 
+/* --- IPHONE COMPATIBLE MUSIC CONTROL --- */
 function fadeInMusic() {
-    if (musicInterval) clearInterval(musicInterval);
+    // Attempt fade-in
     music.volume = 0;
-    music.play().catch(e => console.log("Audio requires interaction"));
     let vol = 0;
-    musicInterval = setInterval(() => {
-        if (vol < 0.5) {
-            vol += 0.05;
-            music.volume = vol;
-        } else {
-            clearInterval(musicInterval);
-        }
-    }, 200);
+    
+    const playPromise = music.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Playback started. Try fading.
+            if (musicInterval) clearInterval(musicInterval);
+            musicInterval = setInterval(() => {
+                if (vol < 0.5) {
+                    vol += 0.05;
+                    // Protect against Read-Only Volume Error on iOS
+                    try { music.volume = vol; } catch (e) { 
+                        // If volume set fails, just keep playing (iOS handles volume physically)
+                        clearInterval(musicInterval); 
+                    }
+                } else {
+                    clearInterval(musicInterval);
+                }
+            }, 200);
+        })
+        .catch(error => {
+            console.log("Auto-play prevented");
+        });
+    }
 }
 
 function fadeOutMusic() {
     if (musicInterval) clearInterval(musicInterval);
-    let vol = music.volume;
+    let vol = music.volume; // Might be 1 on iOS
+    
     musicInterval = setInterval(() => {
         if (vol > 0.05) {
             vol -= 0.05;
-            music.volume = vol;
+            try { music.volume = vol; } catch (e) {
+                // If iOS, we can't fade. Just Pause immediately.
+                music.pause();
+                clearInterval(musicInterval);
+            }
         } else {
             music.volume = 0;
             music.pause();

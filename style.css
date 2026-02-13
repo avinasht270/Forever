@@ -17,6 +17,8 @@ body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Mon
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     opacity: 0; pointer-events: none; transition: opacity 0.8s ease;
     padding: 20px; text-align: center;
+    /* iPhone Fix: Use dynamic viewport height */
+    min-height: 100dvh; 
 }
 .screen.active { opacity: 1; pointer-events: auto; }
 
@@ -34,7 +36,7 @@ p { font-size: 1.15rem; color: #444; margin: 10px 0; line-height: 1.5; }
 
 /* Explicit Colors */
 .white-text { color: #ffffff !important; }
-.big-shadow { text-shadow: 2px 2px 15px rgba(0,0,0,0.8); } /* Makes text pop on photos */
+.big-shadow { text-shadow: 2px 2px 15px rgba(0,0,0,0.8); }
 .black-text { color: #333 !important; text-shadow: none !important; }
 
 /* --- BUTTONS --- */
@@ -52,6 +54,10 @@ input[type="date"] {
     padding: 12px; border-radius: 10px; border: 1px solid #ffb3c1;
     font-size: 1.1rem; text-align: center; margin: 15px 0;
     font-family: 'Montserrat', sans-serif;
+    /* iPhone Fix: Remove default iOS styling */
+    -webkit-appearance: none; 
+    appearance: none;
+    background: white;
 }
 
 /* --- STORY MODE --- */
@@ -62,7 +68,9 @@ input[type="date"] {
     transition: opacity 1s ease; 
     opacity: 0; 
     z-index: -1;
-    transform: translateZ(0); 
+    /* iPhone Fix: Hardware acceleration for smooth image fade */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
     will-change: opacity;
 }
 .story-bg.loaded { opacity: 1; } 
@@ -115,7 +123,7 @@ input[type="date"] {
 .fade-overlay {
     position: absolute; inset: 0; background: #000; z-index: 50;
     display: flex; justify-content: center; align-items: center;
-    transition: opacity 1.2s ease; pointer-events: none; opacity: 0;
+    transition: opacity 1.5s ease; pointer-events: none; opacity: 0;
 }
 .big-chapter-text { color: #fff; font-size: 4rem; text-shadow: 0 0 10px rgba(255,255,255,0.5); opacity: 1; transition: opacity 0.5s;}
 
