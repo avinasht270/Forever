@@ -1,33 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Something Special</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Puru 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="hearts"></div>
+<audio id="bgMusic" src="music/background.mp3" loop></audio>
 
-<div class="container">
-  <div class="card">
-    <h1>👨‍🍳 Chef is cooking…</h1>
-    <p>
-      Something special is being prepared just for you 💖<br><br>
-      Please stay tuned.<br>
-      Good things take time 😉
-    </p>
+<div id="globalBackground" class="background-layer light-mode"></div>
 
-    <div class="loader">
-      <span></span><span></span><span></span>
+<div id="heartContainer"></div>
+
+<section id="landing" class="screen active">
+    <div class="content-wrapper">
+        <h1 class="cursive-title">Hey! Quana Dream 💕</h1>
+        <br>
+        <p class="subtitle">Finally the wait is over and the site is live!</p>
+        <br>
+        <p>I made something for you.</p>
+        <p>I hope you’ll like it 😉</p>
+        <button onclick="goTo('password')">Let’s Begin</button>
     </div>
+</section>
 
-    <p class="footer">
-      Updates coming soon ✨
-    </p>
+<section id="password" class="screen">
+    <div class="content-wrapper">
+        <h2>Uh Oh! Not that easy.</h2>
+        <p>I've put some effort into this so you do the same.</p>
+        <p>My feelings are protected by a password.</p>
+        <br>
+        <p class="hint-text">Hint: The day we met each other.</p>
+        <input type="date" id="dateInput">
+        <button onclick="unlock()">Unlock Content</button>
+        <div id="errorMsg" class="error-text"></div>
+    </div>
+</section>
+
+<section id="gratitude" class="screen">
+    <div class="content-wrapper">
+        <h2 class="cursive-title big-title">Yay! I knew you'd remember it.</h2>
+        <div class="gratitude-list">
+            <p class="highlight-text">Before we begin, Baby...</p>
+            <br>
+            <p>I want to thank you.</p>
+            <p>For showing up.</p>
+            <p>For choosing me.</p>
+            <p>For being there in ways you don’t even realize.</p>
+            <br>
+            <p class="italic-text">I tried to relive just a few of our many favorite moments.</p>
+        </div>
+        <button onclick="startStory()">Let's Dive In</button>
+    </div>
+</section>
+
+<section id="chapterStory" class="screen dark-mode">
+  
+  <div id="cinematicOverlay" class="fade-overlay">
+    <h1 id="chapterTitleDisplay" class="cursive-title big-chapter-text"></h1>
   </div>
-</div>
+
+  <div id="storyBg" class="story-bg"></div>
+  <div class="gradient-shadow"></div>
+  
+  <div class="story-ui">
+      <div id="staticChapterTitle" class="chapter-tag hidden-fade"></div>
+      <div id="storyText" class="typing-area"></div>
+  </div>
+
+  <div class="bottom-controls">
+      <div id="tapPrompt" class="tap-text">Tap to continue...</div>
+      <button id="nextChapterBtn" class="romantic-btn hidden">Next Moment ➔</button>
+  </div>
+</section>
+
+<section id="together" class="screen">
+    <div class="content-wrapper">
+        <div id="togetherText" class="typing-area large-text black-text"></div>
+    </div>
+</section>
+
+<section id="preQuestion" class="screen">
+    <div class="content-wrapper">
+        <h2 class="big-question white-text">Finally...<br>The main question we were waiting for.</h2>
+        <p class="fade-in mt-20 white-text">(Tap to reveal)</p>
+    </div>
+</section>
+
+<section id="final" class="screen">
+    <div class="content-wrapper">
+        <h1 class="cursive-title white-text big-shadow">
+            Will you be my <br>
+            <s style="opacity: 0.7; font-size: 0.6em;">Valentine</s> 
+            <span class="forever">Forever? ♾️</span>
+        </h1>
+        <div class="buttons-row">
+            <button onclick="sayYes()">YES 💖</button>
+            <button id="noBtn" class="gray-btn">No 🙃</button>
+        </div>
+        <p id="noMessage" class="white-text"></p>
+    </div>
+</section>
+
+<section id="celebrate" class="screen">
+    <div class="content-wrapper">
+        <h1 id="celebrateTitle" class="cursive-title"></h1>
+        <p id="celebrateBody"></p>
+    </div>
+</section>
 
 <script src="script.js"></script>
 </body>
