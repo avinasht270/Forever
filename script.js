@@ -4,15 +4,15 @@ const bgLayer = document.getElementById("globalBackground");
 /* STORY DATA */
 const story = [
     {
-        title: "The Beginning",
+        title: "Convocation",
         scenes: [
-            { img: "images/convocation1.jpg", text: "You took a leap of faith, flying across the country while still in college..." },
-            { img: "images/convocation2.jpg", text: "...hiding it from everyone just to stand by my side." },
+            { img: "images/convocation1.jpg", text: "You took a leap of faith, flying across the states while still in college..." },
+            { img: "images/convocation2.jpg", text: "...hiding it from home just to stand by my side, on one of my most important day of life" },
             { img: "images/convocation3.jpg", text: "In that crowded hall, I knew right then: You are my forever." }
         ]
     },
     {
-        title: "Delhi Days",
+        title: "Delhi",
         scenes: [
             { img: "images/delhi1.jpg", text: "They say living together reveals who a person truly is." },
             { img: "images/delhi2.jpg", text: "For us? It revealed magic. Just you, me, and the city lights." },
@@ -20,26 +20,26 @@ const story = [
         ]
     },
     {
-        title: "Brave Shillong",
+        title: "Shillong",
         scenes: [
-            { img: "images/shillong1.jpg", text: "Shillong wasn't easy for you, I know." },
-            { img: "images/shillong2.jpg", text: "But watching you manage everything alone left me in awe." },
-            { img: "images/shillong3.jpg", text: "You showed me exactly how brave and resilient you are." }
+            { img: "images/shillong1.jpg", text: "You never really liked Shillong much. But I loved seeing you there" },
+            { img: "images/shillong2.jpg", text: "Managing everything on your own. Away from home, but never weak" },
+            { img: "images/shillong3.jpg", text: "Strong. Mature. And still the same clumsy girl I tease." }
         ]
     },
     {
         title: "Manali Chaos",
         scenes: [
-            { img: "images/manali1.jpg", text: "The arguments, the 'No', the 'Not Possible'..." },
-            { img: "images/manali2.jpg", text: "But seeing you on the back of that scooter made every struggle worth it." }
+            { img: "images/manali1.jpg", text: "Yes. No. Not possible. Arguments. And then finally… we’re going." },
+            { img: "images/manali2.jpg", text: "Mountains. Scooter rides. You behind me. For two days, the world felt paused. I wished it lasted longer." }
         ]
     },
     {
         title: "Dharamshala",
         scenes: [
-            { img: "images/dharamshala1.jpg", text: "Birthday week madness and cafe hopping!" },
-            { img: "images/dharamshala2.jpg", text: "I'd ride 16km for the 'wrong' food any day just to see you laugh." },
-            { img: "images/dharamshala3.jpg", text: "Our fights don't break us; they build us." }
+            { img: "images/dharamshala1.jpg", text: "Your birthday week. Scooters and café hopping. Small fights. Big love." },
+            { img: "images/dharamshala2.jpg", text: "And that 16km Himachali Dham ride? Maybe unnecessary. Still worth it." },
+            { img: "images/dharamshala3.jpg", text: "We never let arguments win. Our fights don't break us; they build us." }
         ]
     }
 ];
@@ -85,7 +85,7 @@ function unlock() {
         goTo("gratitude");
         fadeInMusic();
     } else {
-        document.getElementById("errorMsg").innerText = "Think about the Airport 😉";
+        document.getElementById("errorMsg").innerText = "Oops! Not correct. Think about the Airport 😉";
     }
 }
 
@@ -235,7 +235,7 @@ function sayYes() {
     
     goTo("celebrate");
     document.getElementById("celebrateTitle").innerText = "I Knew It! ❤️";
-    document.getElementById("celebrateBody").innerText = "You couldn't break my heart 😉.\nHappy Valentine's Day, my Forever.";
+    document.getElementById("celebrateBody").innerText = "You couldn't break my heart 😉.\nHappy Valentine's Day, my baby, my Forever.";
     
     startConfetti();
     fadeInMusic();
